@@ -8,7 +8,7 @@ Guía de Git flow, branching strategy, code review y deployment para ToysBubus.
 
 ### Ramas Principales
 
-```
+```a
 main (production ready)
  ├── staging (pre-producción)
  └── develop (integración)
@@ -21,7 +21,7 @@ main (production ready)
 ### Nomenclatura de Ramas
 
 | Tipo | Patrón | Ejemplo |
-|------|--------|---------|
+| ------ | -------- | --------- |
 | Feature | `feat/nombre-corto` | `feat/jwt-auth` |
 | Fix | `fix/bug-description` | `fix/null-pointer-ui` |
 | Refactor | `refactor/area` | `refactor/repository-layer` |
@@ -29,6 +29,7 @@ main (production ready)
 | Chore | `chore/task` | `chore/update-deps` |
 
 **Reglas:**
+
 - ✅ Usar kebab-case (guiones)
 - ✅ Ser descriptivo pero conciso
 - ✅ Empezar desde `develop`
@@ -39,17 +40,20 @@ main (production ready)
 ## 🔄 Flujo de Desarrollo
 
 ### 1. Obtener Última Versión
+
 ```bash
 git checkout develop
 git pull origin develop
 ```
 
 ### 2. Crear Rama de Feature
+
 ```bash
 git checkout -b feat/nombre-del-feature
 ```
 
 ### 3. Desarrollar Localmente
+
 ```bash
 # Hacer cambios
 # Ejecutar tests
@@ -65,6 +69,7 @@ git commit -m "feat(auth): implement password validation"
 ```
 
 ### 4. Push a Remoto
+
 ```bash
 git push origin feat/nombre-del-feature
 
@@ -73,19 +78,23 @@ git push -u origin feat/nombre-del-feature
 ```
 
 ### 5. Crear Pull Request
+
 En GitHub/GitLab:
+
 - **Base:** `develop`
 - **Compare:** `feat/nombre-del-feature`
 - **Título:** Formato convencional: `feat(auth): Add JWT validation`
 - **Descripción:** Qué cambió, por qué, ticket relacionado
 
 ### 6. Code Review
+
 - Esperar revisión de al menos 1 dev
 - Responder comentarios
 - Hacer cambios solicitados con nuevos commits
 - No reescribir historia (a menos que sea WIP)
 
 ### 7. Merge a Develop
+
 ```bash
 # Después de aprobación, merge en GitHub ui o:
 git checkout develop
@@ -96,6 +105,7 @@ git push origin develop
 ```
 
 ### 8. Eliminar Rama
+
 ```bash
 # Local
 git branch -d feat/nombre-del-feature
@@ -109,7 +119,8 @@ git push origin -d feat/nombre-del-feature
 ## 📝 Conventional Commits
 
 ### Formato
-```
+
+```a
 type(scope): subject
 
 body (opcional)
@@ -118,8 +129,9 @@ footer (opcional)
 ```
 
 ### Tipos
+
 | Tipo | Uso | Ejemplo |
-|------|-----|---------|
+| ------ | ----- | --------- |
 | `feat` | Nueva funcionalidad | `feat(auth): add JWT validation` |
 | `fix` | Corrección de bug | `fix(db): handle null users query` |
 | `refactor` | Cambio sin funcionalidad | `refactor(service): simplify login logic` |
@@ -131,17 +143,21 @@ footer (opcional)
 | `ci` | CI/CD | `ci: add github actions workflow` |
 
 ### Scope
+
 Sin scope (solo si es global):
-```
+
+```a
 chore: update dependencies
 ```
 
 Con scope (recomendado):
-```
+
+```a
 feat(auth): add JWT validation
 ```
 
 ### Subject (Asunto)
+
 - ✅ Imperativo: "add" no "adds" o "added"
 - ✅ Minúscula: "add" no "Add"
 - ✅ Sin período: "add feature" no "add feature."
@@ -149,7 +165,7 @@ feat(auth): add JWT validation
 
 ### Ejemplos Completos
 
-```
+```a
 feat(auth): implement JWT token validation
 
 Add JWT validation to AuthService. Validates token signature,
@@ -158,7 +174,7 @@ expiration, and issuer. Raises TokenExpiredException if invalid.
 Closes #42
 ```
 
-```
+```a
 fix(db): handle null pointer in user query
 
 Repository.findByEmail() was not checking null before accessing
@@ -172,6 +188,7 @@ Fixes #123
 ## 🧪 Testing Antes de Commit
 
 ### Backend
+
 ```bash
 cd toysbubus_server
 
@@ -186,6 +203,7 @@ dart test --coverage=coverage
 ```
 
 ### Flutter
+
 ```bash
 cd toysbubus_flutter
 
@@ -200,6 +218,7 @@ flutter test --coverage
 ```
 
 ### Análisis de Código
+
 ```bash
 # Análisis lint
 dart analyze
@@ -216,23 +235,29 @@ dart format lib/ --set-exit-if-changed
 ## 🔀 Fusionar Ramas
 
 ### Merge Squash (Recomendado)
+
 ```bash
 git merge --squash feat/new-feature
 git commit -m "feat(scope): single meaningful message"
 ```
+
 ✅ Historia limpia, 1 commit por feature
 
 ### Merge Normal (Alternativo)
+
 ```bash
 git merge feat/new-feature --no-ff
 ```
+
 ✅ Preserva historia de feature branch
 
 ### Rebase (Solo en WIP)
+
 ```bash
 git rebase develop
 git push -f origin feat/...
 ```
+
 ❌ No usar en ramas compartidas
 
 ---
@@ -240,6 +265,7 @@ git push -f origin feat/...
 ## 🚀 Deploy al Staging/Producción
 
 ### A Staging
+
 ```bash
 git checkout staging
 git pull origin staging
@@ -253,6 +279,7 @@ git push origin staging
 ```
 
 ### A Producción (Release)
+
 ```bash
 # Crear rama de release
 git checkout -b release/v1.0.0 develop
@@ -283,32 +310,37 @@ git push origin develop
 
 ## 💬 Code Review Checklist
 
-### Revisor Debe Verificar:
+### Revisor Debe Verificar
 
 **Funcionalidad:**
+
 - [ ] Código hace lo que dice el PR
 - [ ] Tests incluidos y pasan
 - [ ] Sin regressions en funciones existentes
 - [ ] Manejo de edge cases
 
 **Calidad:**
+
 - [ ] Sigue arquitectura (endpoints → services → repos)
 - [ ] Nombres claros y descriptivos
 - [ ] Sin código duplicado
 - [ ] Está completo (no WIP)
 
 **Seguridad:**
+
 - [ ] Sin hardcoded secrets
 - [ ] Validaciones en Service
 - [ ] Excepciones serializables
 - [ ] SQL injection previsto
 
 **Performance:**
+
 - [ ] Queries optimizadas
 - [ ] No N+1 queries
 - [ ] Índices en campos buscados
 
 **Documentación:**
+
 - [ ] Comentarios útiles (///)
 - [ ] Cambios en docs/ si aplica
 - [ ] Commit messages semánticos
@@ -342,11 +374,13 @@ git merge hotfix/critical-bug
 ## 📊 Git Tips & Tricks
 
 ### Ver Historial Lineal
+
 ```bash
 git log --oneline --graph --all
 ```
 
 ### Stash (Guardar cambios temporalmente)
+
 ```bash
 git stash
 git stash list
@@ -354,6 +388,7 @@ git stash pop
 ```
 
 ### Amend último commit
+
 ```bash
 git add .
 git commit --amend --no-edit
@@ -362,6 +397,7 @@ git push -f origin feat/branch
 ```
 
 ### Reset a última versión online
+
 ```bash
 git fetch origin
 git reset --hard origin/develop
@@ -372,7 +408,7 @@ git reset --hard origin/develop
 ## ✋ Reglas a Seguir
 
 | ✅ Hacer | ❌ Evitar |
-|---------|----------|
+| --------- | ---------- |
 | Commits pequeños y frecuentes | Commits gigantes |
 | Messages semánticos | "wip", "fix", "updated" |
 | Rebasar contra develop antes de PR | Mergear sin rebase |

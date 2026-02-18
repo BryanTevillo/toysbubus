@@ -9,8 +9,10 @@ Registro de todas las dependencias externas, su propósito y justificación de e
 ### Backend (toysbubus_server)
 
 #### Serverpod 3.3.1
+
 **Propósito:** Framework RPC backend
-**Motivo:** 
+**Motivo:**
+
 - RPC type-safe entre backend y cliente Flutter
 - ORM integrado para Postgres
 - Generación automática de código
@@ -19,12 +21,16 @@ Registro de todas las dependencias externas, su propósito y justificación de e
 - Actualmente en v3.3.1 (November 2025)
 
 **Referencias:**
+
 - [Serverpod Docs](https://docs.serverpod.dev)
 - [GitHub](https://github.com/serverpod/serverpod)
 
-#### Serverpod Auth IDP Server 3.3.1
+#### Serverpod Auth IDP
+
+Server 3.3.1
 **Propósito:** Autenticación con IDP (Identity Providers)
 **Motivo:**
+
 - Soporte para OAuth 2.0 / OpenID Connect
 - Integración con Google, Apple, etc.
 - Manejo de sessions de forma segura
@@ -33,8 +39,10 @@ Registro de todas las dependencias externas, su propósito y justificación de e
 **Compatible con:** Serverpod 3.3.1
 
 #### Serverpod OpenAPI ^0.0.3
+
 **Propósito:** OpenAPI 3.0 specification generator para endpoints
 **Motivo:**
+
 - Genera especificación OpenAPI automáticamente
 - Integración con Swagger UI
 - Documentación interactiva de APIs
@@ -42,6 +50,7 @@ Registro de todas las dependencias externas, su propósito y justificación de e
 - Facilita testing y debugging
 
 **Referencias:**
+
 - [pub.dev/packages/serverpod_openapi](https://pub.dev/packages/serverpod_openapi)
 
 ---
@@ -49,6 +58,7 @@ Registro de todas las dependencias externas, su propósito y justificación de e
 ### Cliente (toysbubus_client)
 
 Auto-generado desde `serverpod generate`:
+
 - `serverpod_client` - Cliente RPC type-safe
 - `serverpod_serialization` - Serialización de modelos
 
@@ -59,8 +69,10 @@ Auto-generado desde `serverpod generate`:
 ### Frontend (toysbubus_flutter)
 
 #### Flutter SDK
+
 **Propósito:** Framework UI cross-platform
 **Motivo:**
+
 - Compilación a iOS, Android, Web, Desktop
 - Hot reload para development rápido
 - Large ecosystem de paquetes
@@ -70,7 +82,9 @@ Auto-generado desde `serverpod generate`:
 **Versión:** Última stable
 
 #### Serverpod Flutter Client
+
 Auto-generado, incluye:
+
 - `serverpod` (flutter) - Cliente para conectarse a backend
 - CRUD automático
 - Real-time updates con WebSocket
@@ -82,11 +96,13 @@ Auto-generado, incluye:
 
 ## 📦 Dependencias de Desarrollo
 
-### Backend (toysbubus_server)
+### Backend Development (toysbubus_server)
 
 #### Lints >= 3.0.0 < 7.0.0
+
 **Propósito:** Lint rules para Dart
 **Motivo:**
+
 - Análisis estático de código
 - Mejora calidad y consistencia
 - Recomendaciones de Dart oficial
@@ -96,20 +112,25 @@ dart analyze
 ```
 
 #### Serverpod Test 3.3.1
+
 **Propósito:** Testing framework para backend
 **Motivo:**
+
 - Tests para endpoints y services
 - Mock de base de datos
 - Integración con test framework estándar
 
 **Uso:**
+
 ```bash
 dart test test/services/auth_service_test.dart
 ```
 
 #### Test >= 1.25.5
+
 **Propósito:** Testing framework Dart
 **Motivo:**
+
 - Unit testing
 - Widget testing
 - Integration testing
@@ -120,21 +141,27 @@ dart test test/services/auth_service_test.dart
 ## 🔧 Herramientas de Desarrollo
 
 ### Serverpod CLI
+
 ```bash
-dart pub global activate serverpod_cli
+dart
+ pub global activate serverpod_cli
 ```
+
 **Para:**
+
 - Generar código automático
 - Crear migraciones
 - Comandos Serverpod
 
 **Uso:**
+
 ```bash
 serverpod generate
 serverpod create-migration --name add_email_field
 ```
 
 ### Dart SDK Tools
+
 ```bash
 # Análisis
 dart analyze
@@ -147,9 +174,11 @@ dart fix --apply
 ```
 
 ### Flutter Doctor
+
 ```bash
 flutter doctor
 ```
+
 Verifica setup de Flutter y dependencias del sistema.
 
 ---
@@ -158,7 +187,8 @@ Verifica setup de Flutter y dependencias del sistema.
 
 Ninguna explícita aún (agregarse cuando sea necesario):
 
-### Posibles Candidate para Futuro:
+### Posibles Candidate para Futuro
+
 - `bcrypt` - Hashing de passwords
 - `crypto` - Operaciones criptográficas
 - `http` - Cliente HTTP (si expande beyond RPC)
@@ -168,10 +198,10 @@ Ninguna explícita aún (agregarse cuando sea necesario):
 
 ## 📱 Dependencias Opcionales (Futuro)
 
-### Por Implementar Según Roadmap:
+### Por Implementar Según Roadmap
 
 | Feature | Dependencia | Versión | Motivo |
-|---------|-------------|---------|--------|
+| --------- | ------------- | --------- | -------- |
 | Persistencia Local | `drift` | ^2.0.0 | Local DB con SQLite |
 | Estado Global | `riverpod` | ^2.0.0 | State management Flutter |
 | Storage Seguro | `flutter_secure_storage` | ^9.0.0 | Guardar tokens/secrets |
@@ -184,6 +214,7 @@ Ninguna explícita aún (agregarse cuando sea necesario):
 ## 🚀 Actualización de Dependencias
 
 ### Chequear Actualizaciones
+
 ```bash
 # Backend
 cd toysbubus_server
@@ -195,6 +226,7 @@ flutter pub outdated
 ```
 
 ### Actualizar
+
 ```bash
 # Actualizar all
 dart pub upgrade
@@ -206,7 +238,8 @@ dart pub upgrade serverpod
 dart pub upgrade --major-versions
 ```
 
-### Política de Updates:
+### Política de Updates
+
 - ✅ Patch updates (3.3.0 → 3.3.1): Automático
 - ⚠️ Minor updates (3.3 → 3.4): Revisar changelog
 - 🔴 Major updates (3.x → 4.x): Evaluar breaking changes
@@ -228,7 +261,8 @@ cd ../toysbubus_flutter
 flutter pub outdated
 ```
 
-### Proceso:
+### Proceso
+
 1. Revisar [pub.dev](https://pub.dev) para cada dependency
 2. Buscar security advisories
 3. Mantener al día versiones estables
@@ -238,7 +272,7 @@ flutter pub outdated
 
 ## 📊 Dependency Graph
 
-```
+```a
 toysbubus (workspace)
 ├── toysbubus_server
 │   ├── serverpod 3.3.1
@@ -262,7 +296,7 @@ toysbubus (workspace)
 ## 🎯 Compatibilidad
 
 | Componente | Versión | SDK Dart | SDK Flutter |
-|------------|---------|----------|------------|
+| ------------ | --------- | ---------- | ------------ |
 | toysbubus_server | 3.3.1 | ^3.8.0 | N/A |
 | toysbubus_client | Auto | ^3.8.0 | N/A |
 | toysbubus_flutter | - | ^3.8.0 | 3.19+ |

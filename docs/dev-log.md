@@ -10,16 +10,19 @@ Registro de cambios, problemas resueltos y lecciones aprendidas durante el desar
 No había forma fácil de testear los endpoints del backend. Swagger UI permitiría explorar y probar endpoints sin Postman.
 
 **Causa Raíz:**
+
 - Backend Serverpod sin documentación interactiva
 - Necesidad de herramientas externas para testing
 - Falta de especificación OpenAPI
 
 **Solución:**
+
 1. Investigado opciones en pub.dev:
    - `serverpod_swagger` (0.3.1) - más nuevo pero conflictos de dependencias
    - `serverpod_openapi` (0.0.3) - genera spec OpenAPI con Swagger UI ✅
 
 2. Agregada dependencia en `pubspec.yaml`:
+
    ```yaml
    dependencies:
      serverpod_openapi: ^0.0.3
@@ -42,6 +45,7 @@ No había forma fácil de testear los endpoints del backend. Swagger UI permitir
    ```
 
 **Cómo Funciona:**
+
 - ✅ Genera OpenAPI 3.0 spec automáticamente de endpoints
 - ✅ Infers HTTP methods de nombres (get*, post*, update*, delete*)
 - ✅ Swagger UI disponible en `http://localhost:8080/openapi`
@@ -50,6 +54,7 @@ No había forma fácil de testear los endpoints del backend. Swagger UI permitir
 - ✅ Compatible con Postman y herramientas externas
 
 **HTTP Method Inference:**
+
 - GET: `get*`, `list*`, `fetch*`, `find*`, `read*`
 - POST: `create*`, `add*`, `insert*`, `save*`, `login*`
 - PATCH: `update*`, `modify*`, `edit*`, `patch*`
@@ -57,6 +62,7 @@ No había forma fácil de testear los endpoints del backend. Swagger UI permitir
 - POST (default): métodos que no coinciden
 
 **URL de Acceso:**
+
 - Swagger UI: `http://localhost:8080/openapi`
 - OpenAPI JSON: `http://localhost:8080/openapi?format=json`
 - OpenAPI YAML: `http://localhost:8080/openapi?format=yaml`
@@ -80,6 +86,7 @@ No había forma fácil de testear los endpoints del backend. Swagger UI permitir
 El proyecto carecía de documentación clara sobre estructura, ejecución local y arquitectura. Nuevos desarrolladores no tenían punto de inicio obvio.
 
 **Causa Raíz:**
+
 - Repositorio en fase inicial pero sin documentación visible
 - README.md y docs/ estaban vacíos
 - Falta de guías para setup, workflow y decisiones técnicas
@@ -130,11 +137,13 @@ Se creó suite completa de documentación:
 ✅ Menos preguntas repetidas
 
 **Advertencias:**
+
 - README.md debe actualizarse si cambian procesos en docs/
 - Workflow.md puede necesitar ajustes con experiencia de equipo
 - Architecture puede expandirse con más servicios complejos
 
 **Commit Relacionado:**
+
 - `docs: add comprehensive project documentation` (6 files, 1674 insertions)
 
 ---

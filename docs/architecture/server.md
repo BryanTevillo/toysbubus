@@ -6,7 +6,7 @@ Documentación de la arquitectura del backend Serverpod, incluyendo capas, respo
 
 ## 📐 Flujo General: Request → Response
 
-```
+```a
 ┌─────────────────────────────────────────────────────┐
 │  Cliente (Flutter / RPC)                            │
 └────────────────────────┬────────────────────────────┘
@@ -50,9 +50,11 @@ Response viaja de vuelta: Repository → Service → Endpoint → Cliente
 ## 🏗️ Capas de Arquitectura
 
 ### 1️⃣ Endpoint Layer
+
 **Ubicación:** `lib/src/endpoints/`
 
 **Responsabilidades:**
+
 - Exponer métodos RPC que serán llamados desde el cliente
 - Recibir parámetros de la solicitud
 - **NUNCA** contener lógica de negocio
@@ -60,6 +62,7 @@ Response viaja de vuelta: Repository → Service → Endpoint → Cliente
 - Retornar respuestas (modelos o excepciones)
 
 **Características:**
+
 ```dart
 /// Endpoint para autenticación
 class AuthEndpoint extends Endpoint {
@@ -73,6 +76,7 @@ class AuthEndpoint extends Endpoint {
 ```
 
 **Reglas Estrictas:**
+
 - ✅ Validar tipos de parámetros
 - ✅ Llamar exactamente a un Service
 - ✅ Dejar errores para Service/Repository
@@ -82,9 +86,11 @@ class AuthEndpoint extends Endpoint {
 ---
 
 ### 2️⃣ Service Layer
+
 **Ubicación:** `lib/src/services/`
 
 **Responsabilidades:**
+
 - Implementar todas las reglas de negocio
 - Validaciones complejas
 - Coordinar múltiples Repositories
@@ -92,6 +98,7 @@ class AuthEndpoint extends Endpoint {
 - Manejar y lanzar excepciones serializables
 
 **Características:**
+
 ```dart
 /// Servicio de autenticación
 class AuthService {
@@ -128,6 +135,7 @@ class AuthService {
 ```
 
 **Patrones:**
+
 - Inyección de dependencias (Repository)
 - Transacciones para operaciones multi-paso
 - Logging de eventos importantes
@@ -136,9 +144,11 @@ class AuthService {
 ---
 
 ### 3️⃣ Repository / Data Layer
+
 **Ubicación:** `lib/src/repositories/`
 
 **Responsabilidades:**
+
 - Acceso exclusivo a base de datos
 - Queries SQL optimizadas
 - CRUD básico (Create, Read, Update, Delete)
@@ -146,6 +156,7 @@ class AuthService {
 - Índices y performance
 
 **Características:**
+
 ```dart
 /// Repositorio para usuarios
 class UserRepository {
@@ -181,6 +192,7 @@ class UserRepository {
 ```
 
 **Reglas:**
+
 - ✅ Queries simples y legibles
 - ✅ Usar ORM (Serverpod DB)
 - ✅ Índices en campos frecuentes
@@ -191,11 +203,13 @@ class UserRepository {
 ---
 
 ### 4️⃣ Models
+
 **Ubicación:** `lib/src/models/`
 
 **Definición:** YAML compilado a Dart
 
 **Características:**
+
 ```yaml
 # Archivo: lib/src/models/user.yaml
 class: User
@@ -211,11 +225,13 @@ fields:
 ```
 
 Se genera automáticamente con:
+
 ```bash
 serverpod generate
 ```
 
 **Reglas:**
+
 - ✅ Definir en YAML
 - ✅ Mantener simple
 - ❌ No lógica compleja en métodos
@@ -224,11 +240,13 @@ serverpod generate
 ---
 
 ### 5️⃣ Exceptions
+
 **Ubicación:** `lib/src/exceptions/`
 
 **Definición:** Excepciones serializables generadas desde YAML
 
 **Características:**
+
 ```yaml
 # Archivo: lib/src/exceptions/auth_exceptions.yaml
 class: InvalidCredentialsException
@@ -242,6 +260,7 @@ fields:
 ```
 
 Se usan en Service para retornar errores claros:
+
 ```dart
 class AuthService {
   Future<AuthResponse> login(String email, String password) async {
@@ -259,6 +278,7 @@ El cliente recibe excepción serializada.
 ## 🔄 Ejemplo Completo: Crear Usuario
 
 ### 1. Endpoint recibe solicitud
+
 ```dart
 class UsersEndpoint extends Endpoint {
   Future<User> createUser(String email, String name, String password) async {
@@ -268,6 +288,7 @@ class UsersEndpoint extends Endpoint {
 ```
 
 ### 2. Service implementa lógica
+
 ```dart
 class UserService {
   Future<User> registerUser(String email, String name, String password) async {
@@ -300,6 +321,7 @@ class UserService {
 ```
 
 ### 3. Repository persiste
+
 ```dart
 class UserRepository {
   Future<User> create(User user) async {
@@ -313,7 +335,7 @@ class UserRepository {
 ## 📊 Decisiones de Diseño
 
 | Decisión | Motivo |
-|----------|--------|
+| ---------- | -------- |
 | **Capas separadas** | Facilita testing, mantenimiento, escalabilidad |
 | **No lógica en Endpoint** | Endpoints son fáciles de testear si solo delegales |
 | **Excepciones serializables** | Cliente recibe errores estructurados |
@@ -325,6 +347,7 @@ class UserRepository {
 ## 🧪 Testing
 
 ### Test de Endpoint
+
 ```dart
 test('create user endpoint', () async {
   // Mock Service
@@ -340,7 +363,6 @@ test('create user endpoint', () async {
 });
 ```
 
-### Test de Service
 ```dart
 test('register user validates password', () async {
   final service = UserService();
@@ -357,6 +379,7 @@ test('register user validates password', () async {
 ## 📚 Principios Aplicados
 
 ✅ **SOLID:**
+
 - **S**: Cada clase/service una responsabilidad
 - **O**: Abierto a extensión (nuevo Services)
 - **L**: Liskov Substitution (interfaces claras)
@@ -364,12 +387,14 @@ test('register user validates password', () async {
 - **D**: Inyección de dependencias
 
 ✅ **Clean Code:**
+
 - Nombres claros y descriptivos
 - Funciones pequeñas y enfocadas
 - Sin código duplicado (DRY)
 - Comentarios cuando sea necesario
 
 ✅ **Best Practices Serverpod:**
+
 - Usar ORM nativo
 - Validación en Service
 - Excepciones en YAML
