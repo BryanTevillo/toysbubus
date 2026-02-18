@@ -6,7 +6,7 @@
 
 ## 📋 Contenido del Proyecto
 
-```
+```a
 toysbubus/
 ├─ toysbubus_server/          Backend Serverpod (3.3.1)
 ├─ toysbubus_client/          Cliente Dart/RPC
@@ -70,14 +70,14 @@ flutter run
 
 El backend sigue una **arquitectura por capas profesional**:
 
-```
+```a
 Request → Endpoint → Service → Repository → Database
 ```
 
 ### Capas Implementadas
 
 | Capa | Ubicación | Responsabilidad |
-|------|-----------|-----------------|
+| ------ | ----------- | ----------------- |
 | **Endpoint** | `lib/src/endpoints/` | Recibir solicitudes HTTP/RPC, sin lógica |
 | **Service** | `lib/src/services/` | Lógica de negocio, orquestación, excepciones |
 | **Repository** | `lib/src/repositories/` | Acceso a datos, queries, persistencia |
@@ -142,6 +142,7 @@ git push origin feat/nombre-feature
 ### Documentar Cambios
 
 Después de cambios significativos:
+
 - Actualizar `docs/architecture/` si afecta diseño
 - Agregar entrada en `docs/dev-log.md` si fue un problema/solución
 - Registrar decisión en `docs/decisions/adr-log.md` si fue elección técnica
@@ -176,13 +177,15 @@ docker compose down -v
 ## 🧪 Testing
 
 ### Swagger UI (Interactivo)
+
 Una vez que el servidor está corriendo, accede a la documentación interactiva:
 
-```
+```a
 http://localhost:8080/openapi
 ```
 
 Características:
+
 - ✅ Documentación auto-generada desde endpoints
 - ✅ Test endpoints directamente desde el browser
 - ✅ Soporte automático de autenticación Bearer token

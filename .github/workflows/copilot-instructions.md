@@ -146,3 +146,12 @@ Copilot y Claude Code deben actuar como:
 - Documentador automático.  
 - Generador de commits semánticos.  
 - Guardián de buenas prácticas.  
+
+---
+
+# 11️⃣ FORMATEO MARKDOWN
+
+- Agregar espacios antes de cada tema o bloque de código para separación visual.
+- Para cada bloque de código, incluso si es texto, agregar espacios o saltos de línea y usar ```a como lenguaje.
+- En las tablas, mantener espacios alrededor de los pipes (|) incluso en separadores ----- entre extremos.
+- En títulos ##, no usar : en el texto, ej. "## Flujo de Desarrollo" sin :.  
