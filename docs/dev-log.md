@@ -16,7 +16,7 @@ No había forma fácil de testear los endpoints del backend. Swagger UI permitir
 
 **Solución:**
 1. Investigado opciones en pub.dev:
-   - `serverpod_swagger` (0.3.1) - más nuevo pero conflictos de dependencias con test
+   - `serverpod_swagger` (0.3.1) - más nuevo pero conflictos de dependencias
    - `serverpod_openapi` (0.0.3) - genera spec OpenAPI con Swagger UI ✅
 
 2. Agregada dependencia en `pubspec.yaml`:
@@ -28,6 +28,7 @@ No había forma fácil de testear los endpoints del backend. Swagger UI permitir
 3. Configuración en `lib/server.dart`:
    - Importar: `import 'package:serverpod_openapi/serverpod_openapi.dart';`
    - Agregar ruta antes de `pod.start()`:
+
    ```dart
    pod.webServer.addRoute(
      RouteOpenApi(
