@@ -4,6 +4,44 @@ Registro de cambios, problemas resueltos y lecciones aprendidas durante el desar
 
 ---
 
+## 2026-02-18 - Agregar OpenAPI para Testing con Swagger
+
+**Problema:**
+No había forma fácil de testear los endpoints del backend. Swagger UI permitiría explorar y probar endpoints sin Postman.
+
+**Causa Raíz:**
+- Backend Serverpod sin documentación interactiva
+- Necesidad de herramientas externas para testing
+- Falta de especificación OpenAPI
+
+**Solución:**
+1. Investigado opciones en pub.dev:
+   - `serverpod_swagger` (0.3.1) - más nuevo pero conflictos de dependencias con test
+   - `serverpod_openapi` (0.0.3) - genera spec OpenAPI con Swagger UI
+
+2. Agregada dependencia:
+   ```yaml
+   dependencies:
+     serverpod_openapi: ^0.0.3
+   ```
+
+3. Instalada y resuelta exitosamente
+
+**Impacto:**
+✅ Swagger UI disponible en `/api/swagger` (después de configuración)
+✅ Documentación OpenAPI 3.0 auto-generada
+✅ Testing directo desde browser
+✅ Compatible con Postman y herramientas externas
+
+**Próximos Pasos:**
+- Configurar endpoint según documentación de serverpod_openapi
+- Documentar URL de Swagger en README
+- Agregar script en pubspec.yaml para generar spec
+
+**Referencia:** [pub.dev/packages/serverpod_openapi](https://pub.dev/packages/serverpod_openapi)
+
+---
+
 ## 2026-02-18 - Documentación Completa del Proyecto
 
 **Problema:**

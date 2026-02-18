@@ -925,6 +925,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.3.1"
+  serverpod_openapi:
+    dependency: transitive
+    description:
+      name: serverpod_openapi
+      sha256: "5ad713794927f90da670374ea33678dbe829ab2180d66e16e8f85202fe22a151"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.3"
   serverpod_serialization:
     dependency: transitive
     description:

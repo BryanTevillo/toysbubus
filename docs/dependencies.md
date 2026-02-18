@@ -32,6 +32,18 @@ Registro de todas las dependencias externas, su propósito y justificación de e
 
 **Compatible con:** Serverpod 3.3.1
 
+#### Serverpod OpenAPI ^0.0.3
+**Propósito:** OpenAPI 3.0 specification generator para endpoints
+**Motivo:**
+- Genera especificación OpenAPI automáticamente
+- Integración con Swagger UI
+- Documentación interactiva de APIs
+- Compatible con Postman/herramientas externas
+- Facilita testing y debugging
+
+**Referencias:**
+- [pub.dev/packages/serverpod_openapi](https://pub.dev/packages/serverpod_openapi)
+
 ---
 
 ### Cliente (toysbubus_client)
