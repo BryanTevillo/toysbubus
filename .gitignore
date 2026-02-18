@@ -9,6 +9,9 @@ config/passwords.yaml
 config/*.secret.yaml
 .env
 *.env
+toysbubus_server/data/
+toysbubus_server/test_data/
+toysbubus_server/pgadmin-data/
 
 # IDE
 .vscode/
