@@ -55,6 +55,7 @@ dart bin/main.dart --apply-migrations
 ```
 
 El servidor estará disponible en `http://localhost:8080`
+**Swagger UI:** Accede a `http://localhost:8080/openapi` para documentación interactiva y testing
 
 ### 4. Ejecutar el Cliente Flutter
 
@@ -173,6 +174,19 @@ docker compose down -v
 ---
 
 ## 🧪 Testing
+
+### Swagger UI (Interactivo)
+Una vez que el servidor está corriendo, accede a la documentación interactiva:
+
+```
+http://localhost:8080/openapi
+```
+
+Características:
+- ✅ Documentación auto-generada desde endpoints
+- ✅ Test endpoints directamente desde el browser
+- ✅ Soporte automático de autenticación Bearer token
+- ✅ Formatos: OpenAPI JSON/YAML disponibles
 
 ### Backend (Serverpod)
 

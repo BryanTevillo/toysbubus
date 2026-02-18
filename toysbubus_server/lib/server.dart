@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:serverpod/serverpod.dart';
 import 'package:serverpod_auth_idp_server/core.dart';
 import 'package:serverpod_auth_idp_server/providers/email.dart';
+import 'package:serverpod_openapi/serverpod_openapi.dart';
 
 import 'src/generated/endpoints.dart';
 import 'src/generated/protocol.dart';
@@ -72,6 +73,19 @@ void run(List<String> args) async {
       '/app/**',
     );
   }
+
+  // Setup OpenAPI documentation route for Swagger UI.
+  // Access at http://localhost:8080/openapi
+  pod.webServer.addRoute(
+    RouteOpenApi(
+      pod,
+      title: 'ToysBubus API',
+      version: '1.0.0',
+      description:
+          'Interactive API documentation for ToysBubus backend server with authentication support.',
+    ),
+    '/openapi',
+  );
 
   // Start the server.
   await pod.start();

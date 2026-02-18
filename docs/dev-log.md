@@ -17,28 +17,59 @@ No había forma fácil de testear los endpoints del backend. Swagger UI permitir
 **Solución:**
 1. Investigado opciones en pub.dev:
    - `serverpod_swagger` (0.3.1) - más nuevo pero conflictos de dependencias con test
-   - `serverpod_openapi` (0.0.3) - genera spec OpenAPI con Swagger UI
+   - `serverpod_openapi` (0.0.3) - genera spec OpenAPI con Swagger UI ✅
 
-2. Agregada dependencia:
+2. Agregada dependencia en `pubspec.yaml`:
    ```yaml
    dependencies:
      serverpod_openapi: ^0.0.3
    ```
 
-3. Instalada y resuelta exitosamente
+3. Configuración en `lib/server.dart`:
+   - Importar: `import 'package:serverpod_openapi/serverpod_openapi.dart';`
+   - Agregar ruta antes de `pod.start()`:
+   ```dart
+   pod.webServer.addRoute(
+     RouteOpenApi(
+       pod,
+       title: 'ToysBubus API',
+       version: '1.0.0',
+       description: 'Interactive API documentation with authentication support.',
+     ),
+     '/openapi',
+   );
+   ```
+
+**Cómo Funciona:**
+- ✅ Genera OpenAPI 3.0 spec automáticamente de endpoints
+- ✅ Infers HTTP methods de nombres (get*, post*, update*, delete*)
+- ✅ Swagger UI disponible en `http://localhost:8080/openapi`
+- ✅ Acceso a formats: JSON (`/openapi?format=json`), YAML (`/openapi?format=yaml`)
+- ✅ Soporte automático de autenticación Bearer token
+- ✅ Compatible con Postman y herramientas externas
+
+**HTTP Method Inference:**
+- GET: `get*`, `list*`, `fetch*`, `find*`, `read*`
+- POST: `create*`, `add*`, `insert*`, `save*`, `login*`
+- PATCH: `update*`, `modify*`, `edit*`, `patch*`
+- DELETE: `delete*`, `remove*`, `destroy*`
+- POST (default): métodos que no coinciden
+
+**URL de Acceso:**
+- Swagger UI: `http://localhost:8080/openapi`
+- OpenAPI JSON: `http://localhost:8080/openapi?format=json`
+- OpenAPI YAML: `http://localhost:8080/openapi?format=yaml`
 
 **Impacto:**
-✅ Swagger UI disponible en `/api/swagger` (después de configuración)
-✅ Documentación OpenAPI 3.0 auto-generada
+✅ Documentación interactiva auto-generada
 ✅ Testing directo desde browser
-✅ Compatible con Postman y herramientas externas
-
-**Próximos Pasos:**
-- Configurar endpoint según documentación de serverpod_openapi
-- Documentar URL de Swagger en README
-- Agregar script en pubspec.yaml para generar spec
+✅ Compatible con Postman y herramientas REST
+✅ Autenticación integrada
+✅ Sin código manual de documentación
 
 **Referencia:** [pub.dev/packages/serverpod_openapi](https://pub.dev/packages/serverpod_openapi)
+
+**Estado:** ✅ Configurado y listo para usar
 
 ---
 
