@@ -7,6 +7,8 @@ build/
 # Serverpod
 config/passwords.yaml
 config/*.secret.yaml
+toysbubus_server/config/passwords.yaml
+toysbubus_server/config/*.secret.yaml
 .env
 *.env
 toysbubus_server/data/
