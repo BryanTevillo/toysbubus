@@ -4,6 +4,49 @@ Registro de cambios, problemas resueltos y lecciones aprendidas durante el desar
 
 ---
 
+## 2026-02-18 - Configuración de Docker Compose con pgAdmin y Resolución de Conflictos de Puertos
+
+**Problema:**
+El servidor Serverpod marcaba error de conexión a la base de datos PostgreSQL. Además, no había forma de navegar visualmente la base de datos para desarrollo y debugging.
+
+**Causa Raíz:**
+- Puerto de base de datos en `config/development.yaml` (8090) no coincidía con el puerto expuesto en `docker-compose.yaml` (8092).
+- Falta de herramienta de administración de DB como pgAdmin para inspeccionar tablas, queries, etc.
+- Conflictos potenciales de puertos con otros servicios locales.
+
+**Solución:**
+1. Actualizar puerto en `toysbubus_server/config/development.yaml`:
+   - Cambiar `port: 8090` a `port: 8092` para coincidir con Docker.
+
+2. Modificar `toysbubus_server/docker-compose.yaml`:
+   - Agregar servicio `pgadmin` con imagen `dpage/pgadmin4:latest`.
+   - Configurar credenciales: email `admin@admin.com`, password `admin`.
+   - Exponer puerto 8099 para acceso web.
+   - Agregar volúmenes para persistencia de datos de pgAdmin.
+   - Usar puertos no estándar (8092 para Postgres, 8091 para Redis, 8099 para pgAdmin) para evitar conflictos.
+
+3. Verificar configuración de red en Postgres:
+   - Comando `listen_addresses='*'` permite conexiones externas.
+   - pgAdmin puede conectarse a `localhost:8092` con user `postgres` y password del environment.
+
+**Cómo Funciona:**
+- ✅ Docker Compose inicia Postgres, Redis y pgAdmin automáticamente.
+- ✅ pgAdmin accesible en `http://localhost:8099` para gestión visual de DB.
+- ✅ Servidor conecta sin errores a DB en puerto 8092.
+- ✅ Volúmenes `./data` y `./pgadmin-data` persisten datos entre reinicios.
+
+**Impacto Futuro:**
+- Desarrollo más eficiente con debugging visual de DB.
+- Menos errores de conexión por configuraciones desactualizadas.
+- Facilita testing y migraciones al ver estado de tablas en tiempo real.
+
+**Advertencias:**
+- Verificar que puertos (8092, 8091, 8099) no choquen con otros servicios en la máquina.
+- No compartir credenciales de pgAdmin en repos públicos.
+- Si se reinicia contenedor Postgres, puede requerir recrear volúmenes si hay corrupción.
+
+---
+
 ## 2026-02-18 - Agregar OpenAPI para Testing con Swagger
 
 **Problema:**
