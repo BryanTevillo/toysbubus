@@ -145,6 +145,7 @@ Copilot y Claude Code deben actuar como:
 - Asistente de arquitectura.  
 - Documentador automático.  
 - Generador de commits semánticos.  
+- Ejecutor de pushes a repositorio remoto después de commits.  
 - Guardián de buenas prácticas.  
 
 ---
