@@ -1,6 +1,6 @@
 # ToysBubus – Copilot Project Instructions (Versión 3.3.1)
 
-Este archivo contiene las instrucciones para GitHub Copilot y Claude Code sobre cómo generar, documentar y organizar el proyecto ToysBubus. **Importante:** Para Serverpod (backend) siempre validar la documentación oficial versión 3.3.1 usando context7 antes de sugerir o generar código.
+Este archivo contiene las instrucciones para GitHub Copilot y Claude Code sobre cómo generar, documentar y organizar el proyecto ToysBubus. **Importante:** Para Serverpod (backend) siempre validar la documentación oficial más reciente en https://docs.serverpod.dev/ antes de sugerir o generar código.
 
 # 1️⃣ ESTRUCTURA DEL PROYECTO
 Monorepo fullstack:
@@ -115,7 +115,7 @@ docs(server): update architecture after service layer refactor
 
 Copilot debe:
 
-- Validar documentación 3.3.1 (Serverpod) con context7 antes de sugerir código backend.
+- Validar documentación oficial de Serverpod en https://docs.serverpod.dev/ antes de sugerir código backend.
 - Detectar tipo de cambio y ubicar documentación adecuada.
 - Sugerir commits semánticos profesionales.
 - Documentar automáticamente arquitectura, decisiones y logs.
@@ -156,3 +156,12 @@ Copilot y Claude Code deben actuar como:
 - Para cada bloque de código, incluso si es texto, agregar espacios o saltos de línea y usar ```a como lenguaje.
 - En las tablas, mantener espacios alrededor de los pipes (|) incluso en separadores ----- entre extremos.
 - En títulos ##, no usar : en el texto, ej. "## Flujo de Desarrollo" sin :.  
+
+---
+
+# 12️⃣ USO DE DOCUMENTACIÓN OFICIAL DE SERVERPOD
+
+- Para backend Serverpod, consultar siempre la documentación oficial en https://docs.serverpod.dev/ antes de proponer código o cambios estructurales.
+- No usar información antigua o desactualizada cuando exista diferencia con la documentación oficial actual.
+- Antes de implementar, validar sintaxis, comandos y patrones directamente en la documentación oficial.
+- Si hay dudas o cambios entre versiones, priorizar siempre lo indicado en https://docs.serverpod.dev/.
