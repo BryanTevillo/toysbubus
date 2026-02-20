@@ -1,0 +1,30 @@
+### Entidad de negocio para registrar información comercial.
+class: Business
+table: business
+fields:
+  ### Identificador único del negocio.
+  id: UuidValue, defaultModel=random_v7, defaultPersist=random_v7
+  ### Nombre comercial del negocio.
+  name: String
+  ### Nombre del propietario o responsable.
+  ownerName: String?
+  ### Teléfono del propietario o responsable.
+  ownerPhone: String?
+  ### Correo del propietario o responsable.
+  ownerEmail: String?
+  ### Dirección física del negocio.
+  address: String?
+  ### Teléfono principal del negocio.
+  phone: String?
+  ### RFC del negocio.
+  rfc: String?
+  ### Latitud geográfica del negocio.
+  latitude: double?
+  ### Longitud geográfica del negocio.
+  longitude: double?
+  ### Estado de activación lógica del negocio.
+  isActive: bool, default=true
+  ### Fecha de creación del registro.
+  createdAt: DateTime, default=now
+  ### Fecha de última actualización del registro.
+  updatedAt: DateTime?

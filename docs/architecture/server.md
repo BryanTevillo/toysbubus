@@ -410,5 +410,40 @@ test('register user validates password', () async {
 
 ---
 
+## Módulo Business
+
+El backend incorpora el módulo `Business` siguiendo arquitectura por capas y ubicaciones definidas en instrucciones del proyecto.
+
+```a
+Request (RPC)
+  -> BusinessEndpoint (`lib/src/endpoints/business_endpoint.dart`)
+  -> BusinessService (`lib/src/services/business_service.dart`)
+  -> BusinessDataRepository (`lib/src/repositories/business_repository.dart`)
+  -> Tabla `business` (PostgreSQL)
+  -> Response / Excepción serializable
+```
+
+### Modelo
+
+- Ubicación: `toysbubus_server/lib/src/models/business.spy.yaml`
+- Tabla: `business`
+- Campos principales:
+  - `id: UuidValue` (default `random_v7`)
+  - `name`
+  - `ownerName`, `ownerPhone`, `ownerEmail`
+  - `address`, `phone`, `rfc`
+  - `latitude`, `longitude`
+  - `isActive` (default `true`)
+  - `createdAt` (default `now`)
+  - `updatedAt` (nullable)
+
+### Excepciones
+
+- Ubicación: `toysbubus_server/lib/src/exceptions/business_validation_exception.spy.yaml`
+- Tipo: `BusinessValidationException`
+- Uso: validaciones de nombre, coordenadas y formato de email en capa service.
+
+---
+
 **Versión:** 1.0
 **Última actualización:** 18 de febrero de 2026

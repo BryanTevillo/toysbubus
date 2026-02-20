@@ -1,0 +1,5 @@
+### Excepción serializable para validaciones de negocio.
+exception: BusinessValidationException
+fields:
+  ### Mensaje de validación para el cliente.
+  message: String

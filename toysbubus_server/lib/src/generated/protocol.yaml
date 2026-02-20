@@ -9,5 +9,11 @@ emailIdp:
   - hasAccount:
 jwtRefresh:
   - refreshAccessToken:
+business:
+  - create:
+  - getById:
+  - list:
+  - update:
+  - deactivate:
 greeting:
   - hello:

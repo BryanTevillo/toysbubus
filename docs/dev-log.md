@@ -4,6 +4,42 @@ Registro de cambios, problemas resueltos y lecciones aprendidas durante el desar
 
 ---
 
+## 2026-02-18 - Implementación del módulo Business por capas
+
+**Problema:**
+
+Se necesitaba crear la tabla `Business` con UUID y campos de negocio, respetando arquitectura por capas y ubicación obligatoria de modelos en `lib/src/models/`.
+
+**Causa Raíz:**
+
+- El módulo `Business` previo fue revertido y no quedaron artefactos funcionales.
+- Existía riesgo de incumplir instrucción arquitectónica sobre carpeta `models`.
+
+**Solución:**
+
+1. Se creó modelo en `toysbubus_server/lib/src/models/business.spy.yaml` con:
+   - `id: UuidValue` (default `random_v7`)
+   - `name`, `ownerName`, `ownerPhone`, `ownerEmail`, `address`, `phone`, `rfc`
+   - `latitude`, `longitude`
+   - `isActive` (default `true`), `createdAt` (default `now`), `updatedAt` nullable
+2. Se creó excepción serializable `BusinessValidationException`.
+3. Se implementó capa repository (`BusinessDataRepository`).
+4. Se implementó capa service (`BusinessService`) con validaciones de nombre, email y coordenadas.
+5. Se implementó endpoint delgado `BusinessEndpoint`.
+6. Se ejecutó `serverpod generate` y se regeneró `protocol`/`endpoints`.
+
+**Impacto Futuro:**
+
+- Base sólida para CRUD de negocios con separación clara de responsabilidades.
+- Menor deuda técnica al mantener patrón endpoint → service → repository.
+- Preparado para migraciones y evolución de campos de negocio.
+
+**Advertencias:**
+
+- `dart analyze` muestra 2 infos en archivos generados sobre `serverpod_auth_core_server` no declarado como dependencia directa; no bloquea la generación del módulo `Business`.
+
+---
+
 ## 2026-02-18 - Configuración de Docker Compose con pgAdmin y Resolución de Conflictos de Puertos
 
 **Problema:**
